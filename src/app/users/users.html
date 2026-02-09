@@ -1,0 +1,28 @@
+<h2>Users</h2>
+
+@if (users().length > 0) {
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (u of users(); track u.id) {
+        <tr>
+          <td>{{ u.id }}</td>
+          <td>{{ u.username }}</td>
+          <td>{{ u.role }}</td>
+          @if (isAdmin) {
+            <td><button (click)="deleteUser(u.id, u.username)">Delete</button></td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p>No users loaded yet.</p>
+}

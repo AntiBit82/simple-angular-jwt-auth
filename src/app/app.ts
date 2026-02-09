@@ -29,6 +29,7 @@ import { AlertComponent } from './alert/alert';
       }
 
       @if (auth.isLoggedIn()) {
+        <a routerLink="/users">Users</a>
         <button (click)="auth.logout()">Logout</button>
       }
     </nav>

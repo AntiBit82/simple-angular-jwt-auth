@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AlertService } from '../service/alert.service';
 import { catchError, throwError } from 'rxjs';
-import { ApiError } from '../model/api-error';
+import { ApiError } from '../model/responses';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const alert = inject(AlertService);
@@ -32,7 +32,6 @@ function parseApiError(err: any): ApiError {
       const parsed = JSON.parse(err.error);
       apiError = { ...apiError, ...parsed };
     } catch {
-      // ignore JSON parse errors
     }
   }
 

@@ -1,22 +1,24 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
   template: `
     <h2>Admin Area</h2>
-    <button (click)="load()">Call /auth/admin</button>
-    <p>{{ message }}</p>
+    <button (click)="loadAdminTestMessage()">Call /auth/admin</button>
+    <p>{{ message() }}</p>
   `
 })
 export class AdminComponent {
-  message = '';
+  message = signal('');
 
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
-  load() {
-    this.http.get('http://localhost:8080/auth/admin', { responseType: 'text' })
-      .subscribe(msg => this.message = msg);
+  loadAdminTestMessage() {
+    this.apiService.getAdminTestMessage().subscribe(msg => {
+      console.log('Received message from /auth/admin:', msg);
+      this.message.set(msg);
+    });
   }
 }
