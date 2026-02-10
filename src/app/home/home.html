@@ -1,13 +1,27 @@
 <div class="home-container mat-typography">
   <mat-card class="home-card">
     <mat-card-header>
-      <mat-card-title>Welcome</mat-card-title>
+      <mat-card-title>Welcome {{ auth.username() || 'Guest' }}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="home-content">
 
       @if (auth.isLoggedIn()) {
         <p class="status">You are logged in</p>
+      } @else {
+        <p class="status">Please register or login</p>
+
+        <div class="actions">
+          <a mat-raised-button color="primary" routerLink="/login">
+            <mat-icon>login</mat-icon>
+            Login
+          </a>
+
+          <a mat-raised-button color="accent" routerLink="/register">
+            <mat-icon>person_add</mat-icon>
+            Register
+          </a>
+        </div>
       }
 
       @if (auth.isAdmin()) {

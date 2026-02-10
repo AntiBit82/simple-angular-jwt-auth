@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './service/auth.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     CommonModule,
-    MatSnackBarModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

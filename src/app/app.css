@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* NAVBAR */
 .navbar {
   background: #1e1e1e;
   padding: 12px 20px;
@@ -17,6 +18,7 @@
   align-items: center;
 }
 
+/* Brand */
 .nav-left .brand {
   font-size: 1.3rem;
   font-weight: bold;
@@ -24,31 +26,38 @@
   text-decoration: none;
 }
 
-.nav-right a {
-  margin-left: 16px;
+/* Right side layout */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Make Material buttons readable on dark background */
+.nav-right a[mat-button],
+.nav-right a[mat-raised-button],
+.nav-right button[mat-raised-button] {
   color: white;
-  text-decoration: none;
-  font-weight: 500;
 }
 
-.nav-right a:hover {
-  text-decoration: underline;
+/* Hover effect for flat buttons */
+.nav-right a[mat-button]:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.logout-btn {
-  margin-left: 16px;
-  padding: 6px 12px;
-  background: #ff4d4d;
-  border: none;
+/* Permanent highlight for active route */
+.nav-right .active-link {
+  background: rgba(255, 255, 255, 0.1) !important;
   border-radius: 4px;
-  color: white;
-  cursor: pointer;
 }
 
-.logout-btn:hover {
-  background: #e64545;
+/* Smooth transitions */
+.nav-right a,
+.nav-right button {
+  transition: background 0.2s ease;
 }
 
+/* Content area */
 .content {
   padding: 20px;
 }
