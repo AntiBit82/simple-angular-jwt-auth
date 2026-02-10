@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../service/alert.service';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,7 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.css'
@@ -24,8 +25,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class RegisterComponent {
 
   form = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    admin: new FormControl(false)
   });
 
   constructor(
@@ -34,18 +36,28 @@ export class RegisterComponent {
   ) {}
 
   register() {
-    const { username, password } = this.form.value;
+    if (this.form.invalid) {
+      this.alert.error('Please fill in all required fields.');
+      return;
+    }
+    
+    const { username, password, admin } = this.form.value;
+    if (admin) {
+      this.registerAdmin(username!, password!);
+    } else {
+      this.registerUser(username!, password!);
+    }
+  }
 
-    this.auth.register(username!, password!).subscribe(res => {
+  registerUser(username: string, password: string) {
+    this.auth.register(username, password).subscribe(res => {
       this.alert.success(res.message);
       this.form.reset();
     });
   }
 
-  registerAdmin() {
-    const { username, password } = this.form.value;
-
-    this.auth.registerAdmin(username!, password!).subscribe(res => {
+  registerAdmin(username: string, password: string) {
+    this.auth.registerAdmin(username, password).subscribe(res => {
       this.alert.success(res.message);
       this.form.reset();
     });

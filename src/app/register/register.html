@@ -6,7 +6,7 @@
 
     <mat-card-content class="register-content">
 
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="register()">
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Username</mat-label>
@@ -18,25 +18,15 @@
           <input matInput type="password" formControlName="password" />
         </mat-form-field>
 
+        <mat-checkbox formControlName="admin">
+          Admin user
+        </mat-checkbox>
+
+        <button mat-raised-button color="primary" class="full-width" type="submit">
+          {{ form.get('admin')?.value ? 'Register admin user' : 'Register user' }}
+        </button>
+
       </form>
-
-      <button
-        mat-raised-button
-        color="primary"
-        class="full-width"
-        (click)="register()"
-      >
-        Register
-      </button>
-
-      <button
-        mat-raised-button
-        color="accent"
-        class="full-width"
-        (click)="registerAdmin()"
-      >
-        Register Admin
-      </button>
 
     </mat-card-content>
   </mat-card>
