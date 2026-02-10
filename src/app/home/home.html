@@ -1,1 +1,35 @@
-<p>home works!</p>
+<div class="home-container mat-typography">
+  <mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>Welcome</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="home-content">
+
+      @if (auth.isLoggedIn()) {
+        <p class="status">You are logged in</p>
+      }
+
+      @if (auth.isAdmin()) {
+        <p class="status">You are an admin</p>
+      }
+
+      <div class="actions">
+        @if (auth.isLoggedIn()) {
+          <button mat-raised-button color="warn" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        }
+
+        @if (auth.isAdmin()) {
+          <a mat-raised-button color="primary" routerLink="/admin">
+            <mat-icon>admin_panel_settings</mat-icon>
+            Admin Area
+          </a>
+        }
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

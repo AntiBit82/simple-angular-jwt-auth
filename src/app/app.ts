@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './service/auth.service';
-import { AlertComponent } from './alert/alert';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -11,32 +11,13 @@ import { AlertComponent } from './alert/alert';
     RouterOutlet,
     RouterLink,
     CommonModule,
-    AlertComponent
+    MatSnackBarModule
   ],
-  template: `
-    <app-alert></app-alert>
-
-    <nav>
-      <a routerLink="/">Home</a>
-
-      @if (!auth.isLoggedIn()) {
-        <a routerLink="/login">Login</a>
-        <a routerLink="/register">Register</a>
-      }
-
-      @if (auth.isAdmin()) {
-        <a routerLink="/admin">Admin</a>
-      }
-
-      @if (auth.isLoggedIn()) {
-        <a routerLink="/users">Users</a>
-        <button (click)="auth.logout()">Logout</button>
-      }
-    </nav>
-
-    <router-outlet></router-outlet>
-  `
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class AppComponent {
+  title = 'Simple JWT Auth App';
+  
   constructor(public auth: AuthService) {}
 }

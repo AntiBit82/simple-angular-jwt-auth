@@ -1,17 +1,18 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export type AlertType = 'success' | 'error' | 'info' | 'warning';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
-  message = signal<string | null>(null);
-  type = signal<AlertType>('info');
 
-  show(msg: string, type: AlertType = 'info') {
-    this.message.set(msg);
-    this.type.set(type);
+  constructor(private snack: MatSnackBar) {}
 
-    setTimeout(() => this.message.set(null), 3000);
+  show(message: string, type: AlertType = 'info') {
+    this.snack.open(message, undefined, {
+      duration: 3000,
+      panelClass: [`alert-${type}`]
+    });
   }
 
   success(msg: string) {
@@ -20,5 +21,13 @@ export class AlertService {
 
   error(msg: string) {
     this.show(msg, 'error');
+  }
+
+  info(msg: string) {
+    this.show(msg, 'info');
+  }
+
+  warning(msg: string) {
+    this.show(msg, 'warning');
   }
 }

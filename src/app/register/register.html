@@ -1,1 +1,43 @@
-<p>register works!</p>
+<div class="register-container mat-typography">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="register-content">
+
+      <form [formGroup]="form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+
+      </form>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        (click)="register()"
+      >
+        Register
+      </button>
+
+      <button
+        mat-raised-button
+        color="accent"
+        class="full-width"
+        (click)="registerAdmin()"
+      >
+        Register Admin
+      </button>
+
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,1 +1,23 @@
-<p>admin works!</p>
+<div class="admin-container mat-typography">
+  <mat-card class="admin-card">
+    <mat-card-header>
+      <mat-card-title>Admin Area</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="admin-content">
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="loadAdminTestMessage()"
+      >
+        Call /auth/admin
+      </button>
+
+      @if (message()) {
+        <p class="admin-message">{{ message() }}</p>
+      }
+
+    </mat-card-content>
+  </mat-card>
+</div>

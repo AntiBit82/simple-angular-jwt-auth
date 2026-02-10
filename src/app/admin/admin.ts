@@ -1,14 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { ApiService } from '../service/api.service';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-admin',
   standalone: true,
-  template: `
-    <h2>Admin Area</h2>
-    <button (click)="loadAdminTestMessage()">Call /auth/admin</button>
-    <p>{{ message() }}</p>
-  `
+  imports: [
+    MatCardModule,
+    MatButtonModule
+  ],
+  templateUrl: './admin.html',
+  styleUrl: './admin.css'
 })
 export class AdminComponent {
   message = signal('');

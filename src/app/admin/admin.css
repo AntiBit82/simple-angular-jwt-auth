@@ -1,0 +1,22 @@
+.admin-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 16px;
+}
+
+.admin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-message {
+  font-size: 1rem;
+  margin-top: 8px;
+}

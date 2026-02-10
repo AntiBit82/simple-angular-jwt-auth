@@ -1,0 +1,27 @@
+<header class="navbar">
+  <nav class="nav-container">
+    <div class="nav-left">
+      <a routerLink="/" class="brand">{{ title }}</a>
+    </div>
+
+    <div class="nav-right">
+      @if (!auth.isLoggedIn()) {
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+      }
+
+      @if (auth.isAdmin()) {
+        <a routerLink="/admin">Admin</a>
+      }
+
+      @if (auth.isLoggedIn()) {
+        <a routerLink="/users">Users</a>
+        <button class="logout-btn" (click)="auth.logout()">Logout</button>
+      }
+    </div>
+  </nav>
+</header>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

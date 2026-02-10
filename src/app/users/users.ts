@@ -1,18 +1,48 @@
-import { Component, signal } from '@angular/core';
+import { Component, ViewChild, signal } from '@angular/core';
 import { User } from '../model/responses';
 import { AuthService } from '../service/auth.service';
 import { AlertService } from '../service/alert.service';
 
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
+
 @Component({
   selector: 'app-users',
-  imports: [],
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
 export class UsersComponent {
   users = signal<User[]>([]);
+  dataSource = new MatTableDataSource<User>([]);
+  displayedColumns = ['id', 'username', 'role', 'actions'];
 
-  constructor(private authService: AuthService, private alertService: AlertService) {}
+  @ViewChild(MatPaginator) set matPaginator(p: MatPaginator) {
+    if (p) this.dataSource.paginator = p;
+  }
+
+  @ViewChild(MatSort) set matSort(s: MatSort) {
+    if (s) this.dataSource.sort = s;
+  }
+
+  constructor(
+    private authService: AuthService,
+    private alertService: AlertService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -20,8 +50,8 @@ export class UsersComponent {
 
   loadUsers() {
     this.authService.listUsers().subscribe(users => {
-      console.log('Received users:', users);
       this.users.set(users);
+      this.dataSource.data = users;
     });
   }
 
@@ -30,10 +60,20 @@ export class UsersComponent {
   }
 
   deleteUser(userId: number, username: string) {
-    this.authService.deleteUserById(userId).subscribe(() => {
-      console.log(`Deleted user with ID ${userId}`);
-      this.alertService.success(`User '${username}' deleted successfully`);
-      this.loadUsers(); 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete User',
+        message: `Are you sure you want to delete '${username}'?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+
+      this.authService.deleteUserById(userId).subscribe(() => {
+        this.alertService.success(`User '${username}' deleted successfully`);
+        this.loadUsers();
+      });
     });
   }
 }

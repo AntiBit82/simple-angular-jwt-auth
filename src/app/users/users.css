@@ -1,0 +1,24 @@
+.users-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+mat-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+mat-header-cell {
+  font-weight: bold;
+}
+
+mat-cell, mat-header-cell {
+  padding: 12px 16px;
+}
+
+mat-paginator {
+  margin-top: 12px;
+}

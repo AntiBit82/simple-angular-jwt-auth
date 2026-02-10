@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* SNACKBAR */
+
+/* SUCCESS */
+.mat-mdc-snack-bar-container.alert-success .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+  color: #ffffff !important;
+}
+
+/* ERROR */
+.mat-mdc-snack-bar-container.alert-error .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+  color: #ffffff !important;
+}
+
+/* INFO */
+.mat-mdc-snack-bar-container.alert-info .mdc-snackbar__surface {
+  background-color: #2196f3 !important;
+  color: #ffffff !important;
+}
+
+/* WARNING */
+.mat-mdc-snack-bar-container.alert-warning .mdc-snackbar__surface {
+  background-color: #ff9800 !important;
+  color: #ffffff !important;
+}

@@ -3,21 +3,23 @@ import { AuthService } from '../service/auth.service';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { AlertService } from '../service/alert.service';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  template: `
-    <h2>Register</h2>
-
-    <form [formGroup]="form">
-      <input formControlName="username" placeholder="Username">
-      <input formControlName="password" placeholder="Password" type="password">
-    </form>
-
-    <button (click)="register()">Register</button>
-    <button (click)="registerAdmin()">Register Admin</button>
-  `
+  imports: [
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './register.html',
+  styleUrl: './register.css'
 })
 export class RegisterComponent {
 

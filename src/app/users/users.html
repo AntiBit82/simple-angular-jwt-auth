@@ -1,28 +1,50 @@
-<h2>Users</h2>
+<div class="users-container mat-typography">
+  <h2>Users</h2>
 
-@if (users().length > 0) {
-  <table border="1" cellpadding="6">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Role</th>
-      </tr>
-    </thead>
+  <mat-table [dataSource]="dataSource" matSort>
 
-    <tbody>
-      @for (u of users(); track u.id) {
-        <tr>
-          <td>{{ u.id }}</td>
-          <td>{{ u.username }}</td>
-          <td>{{ u.role }}</td>
-          @if (isAdmin) {
-            <td><button (click)="deleteUser(u.id, u.username)">Delete</button></td>
-          }
-        </tr>
-      }
-    </tbody>
-  </table>
-} @else {
-  <p>No users loaded yet.</p>
-}
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Username -->
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.username }}</mat-cell>
+    </ng-container>
+
+    <!-- Role -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        @if (isAdmin) {
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deleteUser(user.id, user.username)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

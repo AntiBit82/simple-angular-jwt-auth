@@ -3,28 +3,22 @@ import { AuthService } from '../service/auth.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  template: `
-    <h1>Welcome</h1>
-     @if(auth.isLoggedIn()) {
-      <button (click)="logout()">Logout</button>
-    }
-
-    @if(auth.isLoggedIn()) {
-      <p>You are logged in</p>
-    }
-    @if(auth.isAdmin()) {
-      <p>You are an admin</p>
-    }
-
-    @if(auth.isAdmin()) {
-      <a routerLink="/admin">Admin Area</a>
-    }
-  `
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
+  ],
+  templateUrl: './home.html',
+  styleUrl: './home.css'
 })
 export class HomeComponent {
   constructor(public auth: AuthService) {}

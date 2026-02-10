@@ -1,0 +1,54 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background: #1e1e1e;
+  padding: 12px 20px;
+  color: white;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left .brand {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-right a {
+  margin-left: 16px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-right a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  margin-left: 16px;
+  padding: 6px 12px;
+  background: #ff4d4d;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #e64545;
+}
+
+.content {
+  padding: 20px;
+}

@@ -3,16 +3,23 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
-  template: `
-    <h2>Login</h2>
-    <input [(ngModel)]="username" placeholder="Username">
-    <input [(ngModel)]="password" placeholder="Password" type="password">
-    <button (click)="login()">Login</button>
-  `
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './login.html',
+  styleUrl: './login.css'
 })
 export class LoginComponent {
   username = '';

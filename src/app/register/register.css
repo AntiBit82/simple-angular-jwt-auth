@@ -1,0 +1,26 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 16px;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
