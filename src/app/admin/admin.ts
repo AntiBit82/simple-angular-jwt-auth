@@ -20,8 +20,7 @@ export class AdminComponent {
   constructor(private apiService: ApiService) {}
 
   loadAdminTestMessage() {
-    this.apiService.getAdminTestMessage().subscribe(msg => {
-      console.log('Received message from /auth/admin:', msg);
+    this.apiService.getTestMessage(true).subscribe(msg => {
       this.message.set(msg);
     });
   }

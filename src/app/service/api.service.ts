@@ -8,7 +8,8 @@ export class ApiService {
 
     constructor(private http: HttpClient) {}
     
-    getAdminTestMessage() {
-        return this.http.get(this.api + '/admin', { responseType: 'text' });
+    getTestMessage(admin: boolean = false) {
+        const path = `${this.api}/test/${admin ? 'admin' : 'user'}`;
+        return this.http.get(path, { responseType: 'text' });
     }
 }

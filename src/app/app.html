@@ -13,6 +13,15 @@
     </div>
 
     <div class="nav-right">
+      <a
+          mat-button
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <mat-icon>home</mat-icon>
+          Home
+      </a>
 
       @if (!auth.isLoggedIn()) {
         <a

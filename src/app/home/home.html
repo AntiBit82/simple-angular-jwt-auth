@@ -10,38 +10,22 @@
         <p class="status">You are logged in</p>
       } @else {
         <p class="status">Please register or login</p>
-
-        <div class="actions">
-          <a mat-raised-button color="primary" routerLink="/login">
-            <mat-icon>login</mat-icon>
-            Login
-          </a>
-
-          <a mat-raised-button color="accent" routerLink="/register">
-            <mat-icon>person_add</mat-icon>
-            Register
-          </a>
-        </div>
       }
 
       @if (auth.isAdmin()) {
         <p class="status">You are an admin</p>
+      } @else {
+        <p class="status">You are a regular user</p>
       }
 
       <div class="actions">
-        @if (auth.isLoggedIn()) {
-          <button mat-raised-button color="warn" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            Logout
-          </button>
-        }
+        <button mat-raised-button color="primary" (click)="testApi(false)">
+          Test User API
+        </button>
 
-        @if (auth.isAdmin()) {
-          <a mat-raised-button color="primary" routerLink="/admin">
-            <mat-icon>admin_panel_settings</mat-icon>
-            Admin Area
-          </a>
-        }
+        <button mat-raised-button color="accent" (click)="testApi(true)">
+          Test Admin API
+        </button>
       </div>
 
     </mat-card-content>
