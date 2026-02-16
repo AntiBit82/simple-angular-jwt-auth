@@ -26,7 +26,6 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
   styleUrl: './users.css',
 })
 export class UsersComponent {
-  users = signal<User[]>([]);
   dataSource = new MatTableDataSource<User>([]);
   displayedColumns = ['id', 'username', 'role', 'actions'];
 
@@ -51,7 +50,6 @@ export class UsersComponent {
   loadUsers() {
     this.authService.listUsers().subscribe(users => {
       users.sort((a, b) => a.username.localeCompare(b.username));
-      this.users.set(users);
       this.dataSource.data = users;
     });
   }
