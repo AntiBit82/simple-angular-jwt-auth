@@ -57,7 +57,7 @@ export class AuthService {
   isAdmin() {
     if (!this.token) return false;
     const payload = JSON.parse(atob(this.token.split('.')[1]));
-    return payload.role === 'ADMIN_ROLE';
+    return payload.role === 'ROLE_ADMIN';
   }
 
   private decodeAndStoreUser(token: string) {

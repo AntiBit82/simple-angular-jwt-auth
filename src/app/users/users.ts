@@ -50,6 +50,7 @@ export class UsersComponent {
 
   loadUsers() {
     this.authService.listUsers().subscribe(users => {
+      users.sort((a, b) => a.username.localeCompare(b.username));
       this.users.set(users);
       this.dataSource.data = users;
     });
